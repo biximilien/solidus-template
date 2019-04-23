@@ -1,0 +1,33 @@
+= image_tag 'credit_cards/credit_card.gif', id: 'credit-card-image'
+- param_prefix = "payment_source[#{payment_method.id}]"
+.field.field-required
+  = label_tag "name_on_card_#{payment_method.id}", t('spree.name_on_card'), class: 'label'
+  .control
+    = text_field_tag "#{param_prefix}[name]", "#{@order.billing_firstname} #{@order.billing_lastname}", { id: "name_on_card_#{payment_method.id}", autocomplete: "cc-name", class: 'input' }
+
+.field.field-required
+  = label_tag "card_number", t('spree.card_number'), class: 'label'
+  .control
+    = text_field_tag "#{param_prefix}[number]", '', {id: 'card_number', class: 'input required cardNumber', size: 19, maxlength: 19, autocomplete: "cc-number", type: "tel" }
+  %span#card_type{:style => "display:none;"}
+    (
+    %span#looks_like
+      = t('spree.card_type_is')
+      %span#type
+    %span#unrecognized= t('spree.unrecognized_card_type')
+    )
+
+.field.field-required
+  = label_tag "card_expiry", t('spree.expiration'), class: 'label'
+  .control
+    = text_field_tag "#{param_prefix}[expiry]", '', id: 'card_expiry', class: "input required cardExpiry", placeholder: "MM / YY", type: "tel"
+
+.field.field-required
+  = label_tag "card_code", t('spree.card_code'), class: 'label'
+  .control
+    = text_field_tag "#{param_prefix}[verification_value]", '', {id: 'card_code', class: 'input required cardCode', size: 5, type: "tel", autocomplete: "off" }
+  = link_to "(#{t('spree.what_is_this')})", spree.cvv_path, target: '_blank', "data-hook" => "cvv_link", id: "cvv_link"
+- if @order.bill_address
+  = fields_for "#{param_prefix}[address_attributes]", @order.bill_address do |f|
+    = render partial: 'spree/address/form_hidden', locals: { form: f }
+= hidden_field_tag "#{param_prefix}[cc_type]", '', id: "cc_type", class: 'ccType'

@@ -1,0 +1,25 @@
+.address.vcard
+  .fn= address.full_name
+  - unless address.company.blank?
+    .org
+      = address.company
+  .adr
+    .street-address
+      .street-address-line
+        = address.address1
+      - unless address.address2.blank?
+        .street-address-line
+          = address.address2
+    .local
+      %span.locality= address.city
+      %span.region= address.state_text
+      %span.postal-code= address.zipcode
+      .country-name= address.country.try(:name)
+  - unless address.phone.blank?
+    .tel
+      %span.type= t('spree.phone')
+      = address.phone
+  - unless address.alternative_phone.blank?
+    .alternative-phone.tel
+      %span.type= t('spree.alternative_phone')
+      = address.alternative_phone

@@ -1,0 +1,4 @@
+- if current_page.last?
+  = link_to content_tag 'a', t('views.pagination.next').html_safe, rel: 'next', remote: remote, class: 'pagination-next', disabled: true
+- else
+  = link_to t('views.pagination.next').html_safe, url, rel: 'next', remote: remote, class: 'pagination-next'

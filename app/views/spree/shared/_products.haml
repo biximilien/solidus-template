@@ -1,0 +1,32 @@
+- paginated_products = @searcher.retrieve_products if params.key?(:keywords)
+- paginated_products ||= products
+
+- content_for :head do
+  - if paginated_products.respond_to?(:total_pages)
+    = rel_next_prev_link_tags paginated_products
+
+- if products.empty?
+  = t('spree.no_products_found')
+- elsif params.key?(:keywords)
+  %h6.title.search-results-title= t('spree.search_results', keywords: h(params[:keywords]))
+
+- if products.any?
+  #products.product-listing
+    - products.each_slice(3) do |slice|
+      .columns
+        - slice.each do |product|
+          - url = spree.product_path(product, taxon_id: @taxon.try(:id))
+          .product.column.is-4{id: "product_#{product.id}", itemscope: "", itemtype: "http://schema.org/Product"}
+            - cache(@taxon.present? ? [I18n.locale, current_pricing_options, @taxon, product] : [I18n.locale, current_pricing_options, product]) do
+              = link_to truncate(product.name, length: 50), url, class: 'info product-name', itemprop: "name", title: product.name
+              .product-image
+                = link_to(render('spree/shared/image', image: product.gallery.images.first, size: :small, itemprop: "image"), url, itemprop: 'url')
+              %span{itemprop: "offers", itemscope: "", itemtype: "http://schema.org/Offer"}
+                - if price = product.price_for(current_pricing_options)
+                  %span.price.selling{content: "#{price.to_d}", itemprop: "price"}
+                    = price.to_html
+                %span{content: "#{current_pricing_options.currency}", itemprop: "priceCurrency"}
+
+
+- if paginated_products.respond_to?(:total_pages)
+  = paginate paginated_products

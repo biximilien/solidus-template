@@ -1,0 +1,19 @@
+= form_for Spree::User.new, as: :spree_user, url: spree.create_new_session_path do |f|
+  #password-credentials
+    .field
+      = f.label :email, t('spree.email'), class: 'label'
+      .control
+        = f.email_field :email, class: 'input', tabindex: 1, autofocus: true
+
+    .field
+      = f.label :password, t('spree.password'), class: 'label'
+      .control
+        = f.password_field :password, class: 'input', tabindex: 2
+
+    .field
+      = f.label :remember_me, class: 'checkbox' do
+        = f.check_box :remember_me, tabindex: 3
+        = t('spree.remember_me')
+
+    .field
+      = f.submit t('spree.login'), class: 'button is-primary', tabindex: 4

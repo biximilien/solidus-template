@@ -1,0 +1,4 @@
+- if current_page.first?
+  = link_to content_tag 'a', t('views.pagination.previous').html_safe, rel: 'prev', remote: remote, class: 'pagination-previous', disabled: true
+- else
+  = link_to t('views.pagination.previous').html_safe, url, rel: 'prev', remote: remote, class: 'pagination-previous'

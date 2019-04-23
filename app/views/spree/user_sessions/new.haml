@@ -1,0 +1,13 @@
+- if flash[:alert]
+  .flash.errors= flash[:alert]
+
+- @body_id = 'login'
+#existing-customer
+  %h6.subtitle= t('spree.login_as_existing')
+
+  = render partial: 'spree/shared/login'
+
+  .field
+    %small
+      = t('spree.or')
+      #{link_to t('spree.create_a_new_account'), spree.signup_path} | #{link_to t('spree.forgot_password'), spree.recover_password_path}

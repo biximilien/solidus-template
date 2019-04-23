@@ -1,0 +1,6 @@
+#coupon_code
+  = form_tag order_coupon_codes_path(@order), method: :post do
+    .field.is-grouped
+      .control
+        = text_field_tag :coupon_code, nil, placeholder: t("spree.coupon_code"), size: 10, class: 'input'
+      = submit_tag t("spree.apply_code"), class: 'button'

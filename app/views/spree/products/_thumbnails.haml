@@ -1,0 +1,12 @@
+- if @product.gallery.images.size > 1
+  %ul#product-thumbnails.thumbnails
+    - @product.gallery.images.each do |image|
+      - next if image.viewable_id != @product.master.id
+      %li{class: "tmb-all tmb-#{image.viewable_id}"}
+        = link_to(image_tag(image.url(:mini)), image.url(:product))
+
+    - if @product.has_variants?
+      - @product.gallery.images.each do |image|
+        - next if image.viewable_id == @product.master.id
+        %li{class: "vtmb tmb-#{image.viewable_id}"}
+          = link_to(image_tag(image.url(:mini)), image.url(:product))

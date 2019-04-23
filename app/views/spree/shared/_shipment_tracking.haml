@@ -1,0 +1,6 @@
+- shipments = order.shipments.trackable
+- if shipments.any?
+  %h6= t('spree.tracking')
+  .tracking
+    - shipments.each do |shipment|
+      = link_to_tracking(shipment)

@@ -1,0 +1,10 @@
+= paginator.render do
+  %nav.pagination{"aria-label": "pagination", role: "navigation"}
+    = prev_page_tag
+    = next_page_tag
+    %ul.pagination-list
+      - each_page do |page|
+        - if page.display_tag?
+          = page_tag page
+        - elsif !page.was_truncated?
+          = gap_tag

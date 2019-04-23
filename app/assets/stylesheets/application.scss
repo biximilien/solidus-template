@@ -1,0 +1,144 @@
+@import "bulma/sass/utilities/initial-variables";
+@import "bulma/sass/utilities/functions";
+
+// colors
+$primary: #333333;
+$dark: #333333;
+
+// links
+$link: $primary;
+$link-invert: findColorInvert($primary);
+$link-visited: lighten($primary, 10%);
+
+$link-hover: lighten($primary, 20%);
+$link-hover-border: darken($primary, 10%);
+
+$link-focus: lighten($primary, 20%);
+$link-focus-border: $primary;
+
+$link-active: lighten($primary, 20%);
+$link-active-border: lighten($primary, 10%);
+
+// navbar
+$navbar-item-color: $link;
+$navbar-item-hover-color: $link-hover;
+$navbar-item-hover-background-color: $black;
+$navbar-item-active-color: $link-active;
+$navbar-item-active-background-color: transparent;
+
+@import "bulma/sass/utilities/derived-variables";
+
+@import "bulma/bulma";
+@import "@fortawesome/fontawesome-free/css/all";
+
+#body {
+  padding-top: $navbar-height;
+  margin-top: -2 * $navbar-height;
+  min-height: 100vh;
+}
+
+#body > section {
+  min-height: 80vh;
+}
+
+#footer {
+  min-height: 20vh;
+}
+
+.section {
+  padding-top: $navbar-height;
+  padding-bottom: $navbar-height;
+}
+
+#content, #sidebar {
+  padding-top: $navbar-height;
+}
+
+.fieldset {
+  @extend .box;
+  border: 0 none;
+  & legend {
+    @extend .label;
+    background-color: $white;
+    padding: 0 5px;
+  }
+}
+
+#main-image {
+  text-align: center;
+}
+
+#thumbnails {
+  margin-bottom: 1rem;
+
+  ul#product-thumbnails {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    li {
+      margin-left: 0.75rem;
+      margin-right: 0.75rem;
+
+      border: 2px solid $black;
+
+      a {
+        display: block;
+      }
+
+      img {
+        display: block;
+        padding: 0.25rem;
+      }
+    }
+  }
+}
+
+.product {
+  text-align: center;
+  margin-bottom: 2.5rem;
+
+  .product-image {
+    a {
+      display: block;
+    }
+
+    img {
+      padding-left: 2.5rem;
+      padding-right: 2.5rem;
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+      width: 100%;
+      height: auto;
+    }
+
+    transition-property: transform;
+    transition-delay: 0.1s;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+
+    transform: scale3d(1.0, 1.0, 1.0);
+
+    &:hover {
+      transform: scale3d(1.2, 1.2, 1.0);
+    }
+  }
+
+  .price {
+    font-weight: bold;
+    font-size: 1.25rem;
+    text-shadow: rgba(darken($dark, 1.5%),0.15) 1px 1px;
+  }
+
+  .product-name {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-shadow: rgba(darken($primary, 7.5%),0.75) 1px 1px;
+  }
+}
+
+h6 {
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}

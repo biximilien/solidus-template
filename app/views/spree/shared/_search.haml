@@ -1,0 +1,14 @@
+- @taxons = @taxon && @taxon.parent ? @taxon.parent.children : Spree::Taxon.roots
+= form_tag spree.products_path, method: :get do
+  .field.has-addons
+    .control
+      .select.is-small
+        - cache [I18n.locale, @taxons] do
+          = select_tag :taxon, options_for_select([[t('spree.all_departments'), '']] + @taxons.map {|t| [t.name, t.id]}, @taxon ? @taxon.id : params[:taxon]), 'aria-label' => 'Taxon'
+
+    .control.is-expanded
+      = search_field_tag :keywords, params[:keywords], placeholder: t('spree.search'), class: 'input is-small'
+
+    .control
+      = button_tag type: 'submit', class: 'button is-small' do
+        %i.fa.fa-search

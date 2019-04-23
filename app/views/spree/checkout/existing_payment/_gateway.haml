@@ -1,0 +1,7 @@
+%tr{:class => "#{cycle('even', 'odd')}", :id => "#{dom_id(wallet_payment_source, 'spree')}"}
+  %td= wallet_payment_source.payment_source.name
+  %td= wallet_payment_source.payment_source.display_number
+  %td= wallet_payment_source.payment_source.month
+  %td= wallet_payment_source.payment_source.year
+  %td
+    = radio_button_tag "order[wallet_payment_source_id]", wallet_payment_source.id, default, class: "existing-cc-radio"

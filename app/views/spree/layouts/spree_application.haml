@@ -1,0 +1,39 @@
+!!!
+/[if lt IE 7 ] <html class="ie ie6" lang="<haml_loud> I18n.locale </haml_loud>">
+/[if IE 7 ] <html class="ie ie7" lang="<haml_loud> I18n.locale </haml_loud>">
+/[if IE 8 ] <html class="ie ie8" lang="<haml_loud> I18n.locale </haml_loud>">
+/[if IE 9 ] <html class="ie ie9" lang="<haml_loud> I18n.locale </haml_loud>">
+/ [if gt IE 9]><!
+%html{:lang => "#{I18n.locale}"}
+  / <![endif]
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv": "Content-Type"}/
+    = render partial: 'spree/shared/head'
+
+  %body{class: body_class, id: "#{@body_id || 'default'}"}
+
+    = render partial: 'spree/shared/header'
+
+    #body
+      %section.section
+        .container
+          #wrapper
+            - if content_for? :sidebar
+              .columns
+                .column.is-2
+                  = render partial: 'spree/shared/sidebar'
+                .column
+                  #content
+                    = flash_messages
+                    = taxon_breadcrumbs(@taxon)
+                    = yield
+
+            - else
+              #content
+                = flash_messages
+                = taxon_breadcrumbs(@taxon)
+                = yield
+
+            = yield :templates
+
+      = render partial: 'spree/shared/footer'

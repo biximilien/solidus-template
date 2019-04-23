@@ -1,0 +1,21 @@
+- cache [I18n.locale, current_pricing_options, @product] do
+  #product
+    .columns{:itemscope => "", :itemtype => "http://schema.org/Product"}
+      - @body_id = 'product-details'
+      .column.is-5
+        #product-images
+          #main-image
+            = render partial: 'image'
+          #thumbnails
+            = render partial: 'thumbnails'
+        = render partial: 'properties'
+        = render partial: 'promotions'
+
+      .column.is-7
+        #product-description
+          %h1.title#product-name{:itemprop => "name"}= @product.name
+          %p{:itemprop => "description"}
+            = product_description(@product) rescue t('spree.product_has_no_description')
+          #cart-form
+            = render partial: 'cart_form'
+        = render partial: 'taxons'

@@ -1,0 +1,10 @@
+.coupon-code
+  = form_for order, url: update_checkout_path(order.state) do |form|
+    .field
+      = form.label :coupon_code, class: 'label'
+      .control
+        = form.text_field :coupon_code, placeholder: true, class: 'input'
+
+    %button#coupon-code-apply-button.button.coupon-code-apply-button{:type => "submit"}
+      = t('spree.apply_code')
+  #coupon_status

@@ -1,0 +1,26 @@
+.columns
+  .column.is-6
+    %fieldset.fieldset#billing
+      = form.fields_for :bill_address do |bill_form|
+        %legend.has-text-centered{align: "center"}= t('spree.billing_address')
+        %p &nbsp;
+        = render partial: 'spree/address/form', locals: { form: bill_form, address_type: 'billing', address: @order.bill_address }
+
+  .column.is-6
+    %fieldset.fieldset#shipping
+      = form.fields_for :ship_address do |ship_form|
+        %legend.has-text-centered{align: "center"}= t('spree.shipping_address')
+        %label.checkbox#use_billing
+          = check_box_tag 'order[use_billing]', '1', @order.shipping_eq_billing_address?
+          = t('spree.use_billing_address')
+        = render partial: 'spree/address/form', locals: { form: ship_form, address_type: 'shipping', address: @order.ship_address }
+
+%hr.clear/
+
+.form-buttons
+  = submit_tag t('spree.save_and_continue'), class: 'continue button is-primary'
+  - if try_spree_current_user
+    %span
+         
+      \#{check_box_tag 'save_user_address', '1', try_spree_current_user.respond_to?(:persist_order_address)}
+      \#{label_tag :save_user_address, t('spree.save_my_address')}

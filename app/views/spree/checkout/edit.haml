@@ -1,0 +1,36 @@
+#checkout
+  = render partial: 'spree/shared/error_messages', locals: { target: @order }
+
+  .columns
+    %h1.column.is-2= t('spree.checkout')
+    .column.is-10= checkout_progress
+
+  .columns
+    - if @order.state == 'confirm'
+      .column.is-12
+        = form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form|
+          - if @order.state == 'address' || !@order.email?
+            .columns
+              .column.is-6
+                .field.field-required{style: "clear: both"}
+                  = form.label :email, class: 'label'
+                  %p.control
+                    = form.email_field :email, required: true, class: 'input required'
+          = render @order.state, form: form
+    - else
+      .column.is-10
+        = form_for @order, url: update_checkout_path(@order.state), html: { id: "checkout_form_#{@order.state}" } do |form|
+          - if @order.state == 'address' || !@order.email?
+            .columns
+              .column.is-6
+                .field.field-required{style: "clear: both"}
+                  = form.label :email, class: 'label'
+                  %p.control
+                    = form.email_field :email, required: true, class: 'input required'
+          = render @order.state, form: form
+      #checkout-summary.column.is-2
+        = render partial: 'summary', locals: { order: @order }
+
+:javascript
+  Spree.current_order_id = "#{@order.number}"
+  Spree.current_order_token = "#{@order.guest_token}"

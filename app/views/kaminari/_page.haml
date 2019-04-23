@@ -1,0 +1,4 @@
+- if page.current?
+  %li= content_tag 'a', page, {remote: remote, rel: page.rel, class: "pagination-link is-current"}
+- else
+  %li= link_to page, url, {remote: remote, rel: page.rel, class: "pagination-link"}

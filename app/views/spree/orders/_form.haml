@@ -1,0 +1,28 @@
+- order = order_form.object
+
+= render 'spree/shared/error_messages', target: order
+
+%table#cart-detail.table
+  %thead
+    %tr
+      %th.cart-item-description-header{:colspan => "2"}= t('spree.item')
+      %th.cart-item-price-header= t('spree.price')
+      %th.cart-item-quantity-header= t('spree.qty')
+      %th.cart-item-total-header= t('spree.total')
+      %th.cart-item-delete-header
+  %tbody#line_items
+    = render partial: 'spree/orders/line_item', collection: order.line_items, locals: { order_form: order_form }
+  - if order.adjustments.nonzero.exists? || order.line_item_adjustments.nonzero.exists? || order.shipment_adjustments.nonzero.exists? || order.shipments.any?
+    %tr.cart-subtotal
+      %td{:align => "right", :colspan => "4"}
+        %h5= t('spree.cart_subtotal', count: order.line_items.sum(:quantity))
+      %td{:colspan => ""}
+        %h5= order.display_item_total
+      %td
+    = render "spree/orders/adjustments"
+  %tr.cart-total
+    %td{:align => "right", :colspan => "4"}
+      %h5= t('spree.total')
+    %td{:colspan => ""}
+      %h5= order.display_total
+    %td

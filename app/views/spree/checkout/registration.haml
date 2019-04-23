@@ -1,0 +1,25 @@
+= render partial: 'spree/shared/error_messages', locals: { target: @user }
+
+%h1.title= t('spree.registration')
+
+#registration
+  #account
+    .columns
+      .column.is-5
+        = render template: 'spree/user_sessions/new'
+
+        %hr/
+
+        - if Spree::Config[:allow_guest_checkout]
+          #guest_checkout
+            %h6.subtitle= t('spree.guest_user_account')
+            - if flash[:registration_error]
+              .flash.error= flash[:registration_error]
+            = form_for @order, url: update_checkout_registration_path, method: :put, html: { id: 'checkout_form_registration' } do |f|
+
+              .field
+                = f.label :email, t('spree.email'), class: 'label'
+                .control
+                  = f.email_field :email, class: 'input'
+
+              = f.submit t('spree.continue'), class: 'button is-primary'

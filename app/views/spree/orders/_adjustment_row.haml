@@ -1,0 +1,8 @@
+- if adjustments.sum(&:amount) != 0
+  %tr.adjustment
+    %td{:align => "right", :colspan => "4"}
+      %h5
+        = type
+        \: #{label}
+    %td{:colspan => "2"}
+      %h5= Spree::Money.new(adjustments.sum(&:amount), currency: @order.currency)

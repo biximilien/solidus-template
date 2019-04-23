@@ -1,0 +1,11 @@
+- unless @product_properties.empty?
+  %h6.subtitle.product-section-title= t('spree.properties')
+  %table.table.is-striped.is-narrow#product-properties.table-display
+    %tbody
+      - @product_properties.each do |product_property|
+        - css_class = cycle('even', 'odd', name: "properties")
+        %tr{:class => css_class}
+          %td
+            %strong= product_property.property.presentation
+          %td= product_property.value
+      - reset_cycle('properties')

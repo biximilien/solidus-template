@@ -1,0 +1,41 @@
+= form_for :order, url: populate_orders_path do |f|
+  #inside-product-cart-form{:itemprop => "offers", :itemscope => "", :itemtype => "http://schema.org/Offer"}
+    - if @product.variants_and_option_values_for(current_pricing_options).any?
+      #product-variants
+        %h6.subtitle.product-section-title= t('spree.variants')
+        - @product.variants_and_option_values_for(current_pricing_options).each_with_index do |variant, index|
+          .control
+            = label_tag "variant_id_#{ variant.id }", class: 'radio' do
+              = radio_button_tag "variant_id", variant.id, index == 0, 'data-price' => variant.price_for(current_pricing_options)
+              %span.variant-description
+                = variant_options variant
+              - if variant_price variant
+                %span.price.diff= variant_price variant
+              - unless variant.can_supply?
+                %span.out-of-stock= t('spree.out_of_stock')
+    - else
+      = hidden_field_tag "variant_id", @product.master.id
+    - if @product.price_for(current_pricing_options) and !@product.price.nil?
+      %div
+        #product-price
+          %h6.subtitle.product-section-title= t('spree.price')
+          %div
+            %span.price.selling{:content => "#{@product.price_for(current_pricing_options).to_d}", :itemprop => "price"}
+              = display_price(@product)
+            %span{:content => "#{current_pricing_options.currency}", :itemprop => "priceCurrency"}
+          - if @product.master.can_supply?
+            %link{:href => "http://schema.org/InStock", :itemprop => "availability"}/
+          - elsif @product.variants.empty?
+            %br/
+            %span.out-of-stock= t('spree.out_of_stock')
+        .add-to-cart
+          .field.is-grouped
+            %p.control
+              = number_field_tag :quantity, 1, class: 'input', min: 1
+            = button_tag class: 'button is-primary', id: 'add-to-cart-button', type: :submit do
+              = t('spree.add_to_cart')
+    - else
+      #product-price
+        %br/
+        %div
+          %span.price.selling{:itemprop => "price"}= t('spree.product_not_available_in_this_currency')

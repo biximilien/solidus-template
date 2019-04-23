@@ -1,0 +1,37 @@
+%fieldset#payment
+  %legend{align: "center"}= t('spree.payment_information')
+
+  - if @wallet_payment_sources.present?
+    .card_options
+      = radio_button_tag 'use_existing_card', 'yes', true
+      %label{for: "use_existing_card_yes"}
+        = t('spree.use_existing_cc')
+      %br/
+      = radio_button_tag 'use_existing_card', 'no'
+      %label{for: "use_existing_card_no"}
+        = t('spree.use_new_cc_or_payment_method')
+
+    #existing_cards
+      .field
+        %table.existing-credit-card-list
+          %tbody
+            - @wallet_payment_sources.each do |wallet_payment_source|
+              = render(partial: "spree/checkout/existing_payment/#{wallet_payment_source.payment_source.payment_method.partial_name}", locals: { wallet_payment_source: wallet_payment_source, default: wallet_payment_source == @default_wallet_payment_source })
+  #payment-method-fields
+    - @order.available_payment_methods.each do |method|
+      %p
+        %label
+          = radio_button_tag "order[payments_attributes][][payment_method_id]", method.id, method == @order.available_payment_methods.first
+          = t(method.name, scope: 'spree.payment_methods', default: method.name)
+  %ul#payment-methods{"data-hook" => ""}
+    - @order.available_payment_methods.each do |method|
+      %li{:class => "#{'last' if method == @order.available_payment_methods.last}", "data-hook" => "", :id => "payment_method_#{method.id}"}
+        %fieldset
+          = render partial: "spree/checkout/payment/#{method.partial_name}", locals: { payment_method: method }
+  %br{:style => "clear:both;"}/
+
+%br.space/
+.form-buttons
+  = submit_tag t('spree.save_and_continue'), class: 'continue button primary'
+  :javascript
+    Spree.disableSaveOnClick();
