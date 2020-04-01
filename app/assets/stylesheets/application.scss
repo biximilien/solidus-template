@@ -1,67 +1,22 @@
-@import "bulma/sass/utilities/initial-variables";
-@import "bulma/sass/utilities/functions";
-
-// colors
-$primary: #333333;
-$dark: #333333;
-
-// links
-$link: $primary;
-$link-invert: findColorInvert($primary);
-$link-visited: lighten($primary, 10%);
-
-$link-hover: lighten($primary, 20%);
-$link-hover-border: darken($primary, 10%);
-
-$link-focus: lighten($primary, 20%);
-$link-focus-border: $primary;
-
-$link-active: lighten($primary, 20%);
-$link-active-border: lighten($primary, 10%);
-
-// navbar
-$navbar-item-color: $link;
-$navbar-item-hover-color: $link-hover;
-$navbar-item-hover-background-color: $black;
-$navbar-item-active-color: $link-active;
-$navbar-item-active-background-color: transparent;
-
-@import "bulma/sass/utilities/derived-variables";
-
+// bulma
 @import "bulma/bulma";
-@import "@fortawesome/fontawesome-free/css/all";
 
+// fontawesome
+@import "@fortawesome/fontawesome-free/scss/fontawesome";
+@import "@fortawesome/fontawesome-free/scss/brands";
+@import "@fortawesome/fontawesome-free/scss/solid";
+
+// opinionated defaults
 #body {
-  padding-top: $navbar-height;
-  margin-top: -2 * $navbar-height;
-  min-height: 100vh;
+  min-height: calc(100vh - #{$navbar-height});
 }
 
 #body > section {
-  min-height: 80vh;
+  min-height: calc(80vh - #{$navbar-height});
 }
 
 #footer {
   min-height: 20vh;
-}
-
-.section {
-  padding-top: $navbar-height;
-  padding-bottom: $navbar-height;
-}
-
-#content, #sidebar {
-  padding-top: $navbar-height;
-}
-
-.fieldset {
-  @extend .box;
-  border: 0 none;
-  & legend {
-    @extend .label;
-    background-color: $white;
-    padding: 0 5px;
-  }
 }
 
 #main-image {

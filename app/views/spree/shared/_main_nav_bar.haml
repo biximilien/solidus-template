@@ -1,13 +1,12 @@
 = link_to spree.root_path, class: 'navbar-item', id: 'home-link' do
   %i.fa.fa-home
+  &nbsp;
+  Home
+
 = link_to spree.cart_path, class: 'navbar-item', id: 'link-to-cart' do
   %i.fa.fa-shopping-cart
   - if current_order && current_order.line_items.count > 0
     &nbsp;
     = "(#{current_order.line_items.count})"
-
--#   %noscript
--#     = link_to t('spree.cart'), spree.cart_path
--#
--# :javascript
--#   Spree.fetch_cart('#{j spree.cart_link_path}')
+  &nbsp;
+  Cart

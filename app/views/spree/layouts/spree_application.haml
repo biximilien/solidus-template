@@ -17,23 +17,22 @@
     #body
       %section.section
         .container
-          #wrapper
-            - if content_for? :sidebar
-              .columns
-                .column.is-2
-                  = render partial: 'spree/shared/sidebar'
-                .column
-                  #content
-                    = flash_messages
-                    = taxon_breadcrumbs(@taxon)
-                    = yield
+          - if content_for? :sidebar
+            .columns
+              .column.is-2
+                = render partial: 'spree/shared/sidebar'
+              .column
+                #content
+                  = flash_messages
+                  = taxon_breadcrumbs(@taxon)
+                  = yield
 
-            - else
-              #content
-                = flash_messages
-                = taxon_breadcrumbs(@taxon)
-                = yield
+          - else
+            #content
+              = flash_messages
+              = taxon_breadcrumbs(@taxon)
+              = yield
 
-            = yield :templates
+          = yield :templates
 
       = render partial: 'spree/shared/footer'

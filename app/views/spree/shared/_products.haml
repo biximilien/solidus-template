@@ -12,11 +12,11 @@
 
 - if products.any?
   #products.product-listing
-    - products.each_slice(3) do |slice|
+    - products.each_slice(4) do |slice|
       .columns
         - slice.each do |product|
           - url = spree.product_path(product, taxon_id: @taxon.try(:id))
-          .product.column.is-4{id: "product_#{product.id}", itemscope: "", itemtype: "http://schema.org/Product"}
+          .product.column.is-3{id: "product_#{product.id}", itemscope: "", itemtype: "http://schema.org/Product"}
             - cache(@taxon.present? ? [I18n.locale, current_pricing_options, @taxon, product] : [I18n.locale, current_pricing_options, product]) do
               = link_to truncate(product.name, length: 50), url, class: 'info product-name', itemprop: "name", title: product.name
               .product-image

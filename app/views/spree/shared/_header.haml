@@ -1,16 +1,11 @@
 %header#header
-  %nav#top-nav-bar.navbar.is-dark{role: 'navigation', "aria-label": 'main navigation'}
+  %nav#top-nav-bar.navbar.is-primary{role: 'navigation', "aria-label": 'main navigation'}
     .container
       #logo.navbar-brand
         = link_to spree.root_path, class: 'navbar-item' do
           = image_tag 'https://via.placeholder.com/112x28.png?text=LOGO', width: 112, height: 28
 
       .navbar-menu
-        .navbar-start
-          .navbar-menu
-            .navbar-item#search-bar
-              = render partial: 'spree/shared/search'
-
         .navbar-end#main-nav-bar
           .navbar-menu
             = render partial: 'spree/shared/main_nav_bar' if store_menu?

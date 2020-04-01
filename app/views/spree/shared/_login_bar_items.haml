@@ -1,8 +1,16 @@
 - if spree_current_user
   = link_to spree.account_path, class: 'navbar-item' do
-    %i.fa.fa-user
+    %i.fas.fa-user
+    &nbsp;
+    My Account
+
   = link_to spree.logout_path, class: 'navbar-item' do
-    %i.fa.fa-sign-out
+    %i.fas.fa-sign-out
+    &nbsp;
+    Sign Out
+
 - else
   = link_to spree.login_path, id: "link-to-login", class: 'navbar-item' do
-    %i.fa.fa-sign-in
+    %i.fas.fa-sign-in
+    &nbsp;
+    Sign In

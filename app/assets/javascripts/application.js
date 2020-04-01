@@ -12,5 +12,4 @@
 //
 //= require rails-ujs
 //= require activestorage
-//= require @fortawesome/fontawesome-free/js/all
 //= require_tree .
