@@ -3,6 +3,11 @@
 This is an opinionated template with my personnal preferences of a Ruby on Rails
 application with Solidus pre-installed.
 
+What is included:
+* Views are converted to HAML template
+* Replaced the frontend with Bulma CSS
+* RSpec is pre-installed
+
 ## Ruby Version
 
 This template targets Ruby version 2.5.7 but may work with other versions.
