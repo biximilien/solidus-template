@@ -1,0 +1,35 @@
+%h1.title.has-text-centered= accurate_title
+
+.columns
+  .column.is-5
+    .box.account-summary{"data-hook" => "account_summary"}
+      %dl#user-info
+        %dt.has-text-weight-bold= t('spree.email')
+        %dd
+          = @user.email
+          (#{link_to t('spree.edit'), spree.edit_account_path})
+
+.account-my-orders{"data-hook" => "account_my_orders"}
+  %h3.subtitle= t('spree.my_orders')
+  - if @orders.present?
+    %table.order-summary.table.is-fullwidth
+      %thead
+        %tr
+          %th.order-number= I18n.t(:number, scope: 'activerecord.attributes.spree/order')
+          %th.order-date= t('spree.date')
+          %th.order-status= t('spree.status')
+          %th.order-payment-state= t('spree.payment_state')
+          %th.order-shipment-state= t('spree.shipment_state')
+          %th.order-total= t('spree.total')
+      %tbody
+        - @orders.each do |order|
+          %tr{:class => "#{cycle('even', 'odd')}"}
+            %td.order-number= link_to order.number, order_url(order)
+            %td.order-date= l order.completed_at.to_date
+            %td.order-status= t("spree.order_state.#{order.state}").titleize
+            %td.order-payment-state= t("spree.payment_states.#{order.payment_state}").titleize if order.payment_state
+            %td.order-shipment-state= t("spree.shipment_states.#{order.shipment_state}").titleize if order.shipment_state
+            %td.order-total= order.display_total
+  - else
+    %p= t('spree.you_have_no_orders_yet')
+  %br/

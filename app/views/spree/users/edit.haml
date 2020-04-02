@@ -1,0 +1,8 @@
+= render partial: 'spree/shared/error_messages', locals: { target: @user }
+#edit-account
+  %h1.title.has-text-centered= t('spree.editing_user')
+  %div{"data-hook" => "account_edit"}
+    = form_for Spree::User.new, as: @user, url: spree.user_path(@user), method: :put do |f|
+      = render partial: 'spree/shared/user_form', locals: { f: f }
+      %p
+        = f.submit t('spree.update'), class: 'button primary'
