@@ -1,17 +1,17 @@
 .columns.steps-data
   - if order.has_checkout_step?("address")
-    .column.is-4
+    .column.is-3
       %h6
         = t('spree.billing_address')
         = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:address) unless order.completed?
       = render partial: 'spree/shared/address', locals: { address: order.bill_address }
     - if order.has_checkout_step?("delivery")
-      .column.is-4
+      .column.is-3
         %h6
           = t('spree.shipping_address')
           = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:address) unless order.completed?
         = render partial: 'spree/shared/address', locals: { address: order.ship_address }
-      .column.is-4
+      .column.is-3
         %h6
           = t('spree.shipments')
           = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:delivery) unless order.completed?
@@ -22,7 +22,7 @@
               = t('spree.shipment_details', stock_location: shipment.stock_location.name, shipping_method: shipment.selected_shipping_rate.name)
         = render(partial: 'spree/shared/shipment_tracking', locals: {order: order}) if order.shipped?
   - if order.has_checkout_step?("payment")
-    .column.is-4
+    .column.is-3
       %h6
         = t('spree.payment_information')
         = link_to "(#{t('spree.actions.edit')})", checkout_state_path(:payment) unless order.completed?
@@ -38,13 +38,15 @@
   %col{:halign => "center", :valign => "middle", :width => "5%"}/
   %col{:halign => "center", :valign => "middle", :width => "5%"}/
   %col{:halign => "center", :valign => "middle", :width => "5%"}/
+
   %thead
     %tr
       %th{:colspan => "2"}= t('spree.item')
       %th.price= t('spree.price')
       %th.qty= t('spree.qty')
-      %th.total
+      %th.total.has-text-right
         %span= t('spree.total')
+
   %tbody
     - order.line_items.each do |item|
       %tr
@@ -57,61 +59,75 @@
         %td.price
           %span= item.single_money.to_html
         %td= item.quantity
-        %td.total
+        %td.total.has-text-right
           %span= item.display_amount.to_html
+
   %tfoot#order-total
     %tr.total
-      %td{:colspan => "4"}
+      %td.has-text-right{:colspan => "4"}
         %b
           = t('spree.order_total')
           \:
-      %td.total
+      %td.total.has-text-right
         %span#order_total= order.display_order_total_after_store_credit.to_html
+
   %tfoot#subtotal
     %tr#subtotal-row.total
-      %td{:colspan => "4"}
+      %td.has-text-right{:colspan => "4"}
         %b
           = t('spree.subtotal')
           \:
-      %td.total
+      %td.total.has-text-right
         %span= order.display_item_total.to_html
+
   - if order.line_item_adjustments.exists?
     - if order.line_item_adjustments.promotion.eligible.exists?
       %tfoot#price-adjustments
         - order.line_item_adjustments.promotion.eligible.group_by(&:label).each do |label, adjustments|
           %tr.total
-            %td{:colspan => "4"}
+            %td
+            %td
               = t('spree.promotion')
               \:
               %strong= label
-            %td.total
+            %td{:colspan => "2"}
+            %td.total.has-text-right
               %span= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency)
+
   %tfoot#shipment-total
     - order.shipments.group_by { |s| s.selected_shipping_rate.name }.each do |name, shipments|
       %tr.total
-        %td{:colspan => "4"}
+        %td
+        %td
           = t('spree.shipping')
           \:
           %strong= name
-        %td.total
+        %td{:colspan => "2"}
+        %td.total.has-text-right
           %span= Spree::Money.new(shipments.sum(&:total_before_tax), currency: order.currency).to_html
+
   - if order.all_adjustments.tax.exists?
     %tfoot#tax-adjustments
       - order.all_adjustments.tax.group_by(&:label).each do |label, adjustments|
         %tr.total
-          %td{:colspan => "4"}
+          %td
+          %td
             = t('spree.tax')
             \:
             %strong= label
-          %td.total
+          %td{:colspan => "2"}
+          %td.total.has-text-right
             %span= Spree::Money.new(adjustments.sum(&:amount), currency: order.currency)
+
   - if order.total_applicable_store_credit > 0.0
     %tfoot#store-credit
       %tr.total
-        %td{:colspan => "4"}
+        %td
+        %td
           = t('spree.store_credit.store_credit')
           \:
-        %td.total
+        %td{:colspan => "2"}
+        %td.total.has-text-right
           %span= order.display_total_applicable_store_credit.to_html
   %tfoot#order-charges
     - order.adjustments.eligible.each do |adjustment|

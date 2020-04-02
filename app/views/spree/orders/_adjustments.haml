@@ -7,10 +7,10 @@
   - @order.shipments.each do |shipment|
     %tr
       %td{:align => "right", :colspan => "4"}
-        %h5
+        %h5.has-text-right
           = t('spree.shipping')
           \: #{shipment.shipping_method.name}
       %td{:colspan => "2"}
-        %h5= shipment.display_total_before_tax
+        %h5.has-text-right= shipment.display_total_before_tax
   - @order.adjustments.eligible.group_by(&:label).each do |label, adjustments|
     = render "spree/orders/adjustment_row", label: label, adjustments: adjustments, type: t('spree.adjustment')

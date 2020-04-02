@@ -1,9 +1,9 @@
 #checkout
   = render partial: 'spree/shared/error_messages', locals: { target: @order }
 
-  .columns
-    %h1.column.is-2= t('spree.checkout')
-    .column.is-10= checkout_progress
+  %h1.title.has-text-centered= t('spree.checkout')
+
+  = checkout_progress
 
   .columns
     - if @order.state == 'confirm'
@@ -28,7 +28,8 @@
                   %p.control
                     = form.email_field :email, required: true, class: 'input required'
           = render @order.state, form: form
-      #checkout-summary.column.is-2
+
+      .column.is-2.box#checkout-summary
         = render partial: 'summary', locals: { order: @order }
 
 :javascript

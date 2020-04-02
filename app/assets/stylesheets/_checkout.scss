@@ -1,0 +1,21 @@
+// checkout progress steps
+ol.progress-steps {
+  @extend .level;
+
+  li {
+    @extend .level-item;
+
+    span {
+      @extend .button;
+      @extend .is-fullwidth;
+    }
+
+    &.current-first, &.current {
+      span {
+        @extend .is-primary;
+      }
+    }
+
+    margin: 0 0.5rem;
+  }
+}

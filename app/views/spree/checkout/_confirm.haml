@@ -1,6 +1,6 @@
 %fieldset#order_details{"data-hook" => ""}
   .clear
-  %legend{:align => "center"}= t('spree.confirm')
+  %legend.subtitle.has-text-centered{:align => "center"}= t('spree.confirm')
   = render partial: 'spree/shared/order_details', locals: { order: @order }
 %br/
 .form-buttons{"data-hook" => "buttons"}
