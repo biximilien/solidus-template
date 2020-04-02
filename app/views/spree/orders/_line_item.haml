@@ -2,24 +2,26 @@
 = order_form.fields_for :line_items, line_item do |item_form|
   %tr{:class => "#{cycle('', 'alt')} line-item"}
     %td.cart-item-image
-      = link_to(render('spree/shared/image',                                           |
-        image: (variant.gallery.images.first || variant.product.gallery.images.first), |
-        size: :small), variant.product)                                                |
+      = link_to(render('spree/shared/image', image: (variant.gallery.images.first || variant.product.gallery.images.first), size: :small), variant.product)
+
     %td.cart-item-description
       %h4= link_to line_item.name, product_path(variant.product)
       = variant.options_text
       - if line_item.insufficient_stock?
         %span.out-of-stock
           = t('spree.out_of_stock')
-            
           %br/
       %span.line-item-description
         = line_item_description_text(line_item.description)
+
     %td.cart-item-price
       = line_item.single_money.to_html
+
     %td.cart-item-quantity
       = item_form.number_field :quantity, min: 0, class: "line_item_quantity input", size: 5
-    %td.cart-item-total
+
+    %td.cart-item-total.has-text-right
       = line_item.display_amount.to_html unless line_item.quantity.nil?
+
     %td.cart-item-delete
       %a.delete{href: '#', id: "delete_#{dom_id(line_item)}"}

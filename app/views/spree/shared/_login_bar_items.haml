@@ -4,13 +4,13 @@
     &nbsp;
     My Account
 
-  = link_to spree.logout_path, class: 'navbar-item' do
-    %i.fas.fa-sign-out
+  = link_to spree.logout_path, class: 'navbar-item', method: :delete do
+    %i.fas.fa-sign-out-alt
     &nbsp;
     Sign Out
 
 - else
   = link_to spree.login_path, id: "link-to-login", class: 'navbar-item' do
-    %i.fas.fa-sign-in
+    %i.fas.fa-sign-in-alt
     &nbsp;
     Sign In

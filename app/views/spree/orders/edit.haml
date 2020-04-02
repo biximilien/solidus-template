@@ -1,24 +1,28 @@
 - @body_id = 'cart'
 
-%h1= t('spree.shopping_cart')
+%h1.title.has-text-centered= t('spree.shopping_cart')
+
 - if @order.line_items.empty?
   %p= t('spree.your_cart_is_empty')
   %p= link_to t('spree.continue_shopping'), products_path, class: 'button continue'
+
 - else
   .is-clearfix
     = form_for @order, url: update_cart_path, html: {id: 'update-cart'} do |order_form|
       = render 'spree/orders/form', order_form: order_form
       .links.is-pulled-right
-        = button_tag t("spree.update"), class: "button is-primary", id: "update-button"
+        = button_tag t("spree.update"), class: "button", id: "update-button"
         = button_tag class: 'button checkout is-primary', id: 'checkout-link', name: 'checkout' do
-          = t('spree.checkout')
+          %i.fas.fa-shield-alt
+          &nbsp;
+          = t('.secure_checkout')
 
     #empty-cart.is-pulled-left
       = form_tag empty_cart_path, method: :put do
         %p#clear_cart_link
-          = submit_tag t('spree.empty_cart'), class: 'button'
+          = submit_tag t('spree.empty_cart'), class: 'button is-small'
           = t('spree.or')
-          = link_to t('spree.continue_shopping'), products_path, class: 'continue button'
+          = link_to t('spree.continue_shopping'), products_path, class: 'continue button is-small'
 
   %hr/
 
