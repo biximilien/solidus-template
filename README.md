@@ -1,12 +1,22 @@
 # Solidus Template
 
 This is an opinionated template with my personnal preferences of a Ruby on Rails
-application with Solidus pre-installed.
+application with Solidus pre-installed and configured for quick use
+out-of-the-box.
 
 What is included:
 * Views are converted to HAML template
 * Replaced the frontend with Bulma CSS
+* FontAwesome Free is pre-configured
 * RSpec is pre-installed
+
+## Things to note
+
+I prefer to override views rather than use `deface`, you may expect all plugins
+that depend on `deface` not to be compatible with my template. This is usually
+not too much of a problem if you like getting your hands dirty, as you can
+simply take the HTML fragments in `overrides` and place them in corresponding
+views templates. This is my preference when dealing with Solidus extensions.
 
 ## Ruby Version
 
