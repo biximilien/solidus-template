@@ -10,6 +10,8 @@ What is included:
 * FontAwesome Free is pre-configured
 * RSpec is pre-installed
 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Things to note
 
 I prefer to override views rather than use `deface`, you may expect all plugins

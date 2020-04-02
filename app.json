@@ -1,0 +1,7 @@
+{
+  "name": "Solidus Template",
+  "description": "This is an opinionated template with my personnal preferences of a Ruby on Rails application with Solidus pre-installed.",
+  "repository": "https://github.com/biximilien/solidus-template",
+  "keywords": ["Ruby on Rails", "Solidus", "bulma", "HAML", "e-commerce"],
+  "image": "heroku/ruby"
+}
