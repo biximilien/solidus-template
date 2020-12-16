@@ -54,7 +54,7 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
-    autoprefixer-rails (10.0.3.0)
+    autoprefixer-rails (10.1.0.0)
       execjs
     awesome_nested_set (3.2.1)
       activerecord (>= 4.0.0, < 7.0)
@@ -64,9 +64,9 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
-    cancancan (3.1.0)
-    canonical-rails (0.2.9)
-      rails (>= 4.1, < 6.1)
+    cancancan (3.2.0)
+    canonical-rails (0.2.11)
+      rails (>= 4.1, < 6.2)
     capybara (3.34.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -184,8 +184,8 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    paranoia (2.4.2)
-      activerecord (>= 4.0, < 6.1)
+    paranoia (2.4.3)
+      activerecord (>= 4.0, < 6.2)
     pg (1.2.3)
     polyglot (0.3.5)
     public_suffix (4.0.6)
