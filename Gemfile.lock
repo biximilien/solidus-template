@@ -89,7 +89,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.7)
+    concurrent-ruby (1.1.8)
     crass (1.0.6)
     deface (1.6.1)
       nokogiri (>= 1.6)
@@ -348,7 +348,7 @@ GEM
       solidus_support (>= 0.1.3)
     solidus_sample (2.11.4)
       solidus_core (= 2.11.4)
-    solidus_support (0.7.0)
+    solidus_support (0.8.0)
     spring (2.1.1)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -370,7 +370,7 @@ GEM
     temple (0.8.2)
     terrapin (0.6.0)
       climate_control (>= 0.0.3, < 1.0)
-    thor (1.0.1)
+    thor (1.1.0)
     thread_safe (0.3.6)
     tilt (2.0.10)
     truncate_html (0.9.3)
