@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_01_195279) do
+ActiveRecord::Schema.define(version: 2021_03_28_051721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,9 +64,11 @@ ActiveRecord::Schema.define(version: 2020_04_01_195279) do
     t.integer "country_id"
     t.datetime "created_at", precision: 6
     t.datetime "updated_at", precision: 6
+    t.string "name"
     t.index ["country_id"], name: "index_spree_addresses_on_country_id"
     t.index ["firstname"], name: "index_addresses_on_firstname"
     t.index ["lastname"], name: "index_addresses_on_lastname"
+    t.index ["name"], name: "index_spree_addresses_on_name"
     t.index ["state_id"], name: "index_spree_addresses_on_state_id"
   end
 
@@ -446,6 +448,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_195279) do
     t.datetime "updated_at", precision: 6
     t.boolean "promotionable", default: true
     t.string "meta_title"
+    t.datetime "discontinue_on"
     t.index ["available_on"], name: "index_spree_products_on_available_on"
     t.index ["deleted_at"], name: "index_spree_products_on_deleted_at"
     t.index ["name"], name: "index_spree_products_on_name"
@@ -972,6 +975,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_195279) do
     t.datetime "updated_at", precision: 6
     t.string "cart_tax_country_iso"
     t.string "available_locales"
+    t.string "bcc_email"
     t.index ["code"], name: "index_spree_stores_on_code"
     t.index ["default"], name: "index_spree_stores_on_default"
   end
@@ -1059,6 +1063,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_195279) do
     t.boolean "archived", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "default_billing", default: false
     t.index ["address_id"], name: "index_spree_user_addresses_on_address_id"
     t.index ["user_id", "address_id"], name: "index_spree_user_addresses_on_user_id_and_address_id", unique: true
     t.index ["user_id"], name: "index_spree_user_addresses_on_user_id"
@@ -1102,6 +1107,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_195279) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
     t.index ["deleted_at"], name: "index_spree_users_on_deleted_at"
     t.index ["email"], name: "email_idx_unique", unique: true
     t.index ["reset_password_token"], name: "index_spree_users_on_reset_password_token_solidus_auth_devise", unique: true
@@ -1131,6 +1137,7 @@ ActiveRecord::Schema.define(version: 2020_04_01_195279) do
     t.integer "product_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "apply_to_all", default: true, null: false
     t.index ["product_id"], name: "index_spree_variant_property_rules_on_product_id"
   end
 
