@@ -22,7 +22,7 @@ views templates. This is my preference when dealing with Solidus extensions.
 
 ## Ruby Version
 
-This template targets Ruby version 2.5.7 but may work with other versions.
+This template targets Ruby version 3.0.0 and Rails 6.1 but may work with other versions.
 
 ## Database
 
@@ -58,12 +58,11 @@ Find and replace the project name.
 
 ```sh
 $ find . -type f -exec sed -i 's/SolidusTemplate/MyAmazingNewStore/g' {} \;
-$ sed -i 's/SolidusTemplate/MyAmazingNewStore/g' config/application.rb
 ```
 
 ### Update the repository
 
-Create a new repository for your awesome project and update the git remotes.
+Create a new repository for your awesome new store and update the git remotes.
 
 ```sh
 $ git remote set-url origin git@github.com:biximilien/MyAmazingNewStore.git
