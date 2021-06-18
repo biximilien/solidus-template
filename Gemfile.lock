@@ -122,7 +122,7 @@ GEM
     dotenv (2.7.6)
     erubi (1.10.0)
     execjs (2.8.1)
-    ffi (1.15.1)
+    ffi (1.15.3)
     font-awesome-rails (4.7.0.7)
       railties (>= 3.2, < 7)
     foreman (0.87.2)
